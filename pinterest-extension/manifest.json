@@ -1,0 +1,105 @@
+{
+  "manifest_version": 3,
+  "name": "Copy to Pinterest Assistant",
+  "version": "1.2.1",
+  "description": "Manual companion assistant for Pinterest. Receives AI pin metadata & queues from PinPulse and helps you paste Title, Description, URL, Alt Text, and Board onto Pinterest with 1-click.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "*://*.pinterest.com/*",
+    "*://*.pinterest.co.uk/*",
+    "*://*.pinterest.ca/*",
+    "*://*.pinterest.de/*",
+    "*://*.pinterest.fr/*",
+    "*://*.pinterest.es/*",
+    "*://*.pinterest.it/*",
+    "*://*.pinterest.com.au/*",
+    "*://*.pinterest.com.mx/*",
+    "*://*.pinterest.com.br/*",
+    "*://*.pinterest.jp/*",
+    "*://*.pinterest.ch/*",
+    "*://*.pinterest.at/*",
+    "*://*.pinterest.nl/*",
+    "*://*.pinterest.se/*",
+    "*://*.pinterest.dk/*",
+    "*://*.pinterest.ie/*",
+    "*://*.pinterest.pt/*",
+    "*://*.pinterest.pl/*",
+    "*://*.pinterest.ph/*",
+    "*://*.pinterest.nz/*",
+    "*://*.pinterest.cl/*",
+    "*://*.pinterest.co.in/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "http://127.0.0.1/*",
+      "https://*.run.app/*",
+      "https://*.googleusercontent.com/*",
+      "https://*.web.app/*",
+      "https://*.firebaseapp.com/*",
+      "https://*.google.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pinterest.com/*",
+        "*://*.pinterest.co.uk/*",
+        "*://*.pinterest.ca/*",
+        "*://*.pinterest.de/*",
+        "*://*.pinterest.fr/*",
+        "*://*.pinterest.es/*",
+        "*://*.pinterest.it/*",
+        "*://*.pinterest.com.au/*",
+        "*://*.pinterest.com.mx/*",
+        "*://*.pinterest.com.br/*",
+        "*://*.pinterest.jp/*",
+        "*://*.pinterest.ch/*",
+        "*://*.pinterest.at/*",
+        "*://*.pinterest.nl/*",
+        "*://*.pinterest.se/*",
+        "*://*.pinterest.dk/*",
+        "*://*.pinterest.ie/*",
+        "*://*.pinterest.pt/*",
+        "*://*.pinterest.pl/*",
+        "*://*.pinterest.ph/*",
+        "*://*.pinterest.nz/*",
+        "*://*.pinterest.cl/*",
+        "*://*.pinterest.co.in/*"
+      ],
+      "js": [
+        "pinterestSelectors.js",
+        "pinterestDetector.js",
+        "pinterestFiller.js",
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Pinterest Assistant",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}

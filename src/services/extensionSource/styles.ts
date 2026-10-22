@@ -1,0 +1,518 @@
+export const stylesCss = `
+#pinterest-assistant-root {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  user-select: none;
+  box-sizing: border-box;
+
+  /* Dark theme variables */
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-field: #0f172a;
+  --border-color: #334155;
+  --border-focus: #e60023;
+  --text: #f8fafc;
+  --text-secondary: #94a3b8;
+  --header-bg: #0b1120;
+  --accent: #e60023;
+  --accent-hover: #ad001a;
+  --accent-secondary: #0284c7;
+  --accent-secondary-hover: #0369a1;
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --success-border: #10b981;
+}
+
+#pinterest-assistant-root.theme-light {
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-field: #f1f5f9;
+  --border-color: #cbd5e1;
+  --border-focus: #e60023;
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --header-bg: #f8fafc;
+  --accent: #e60023;
+  --accent-hover: #ad001a;
+  --accent-secondary: #0284c7;
+  --accent-secondary-hover: #0369a1;
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --success-border: #10b981;
+}
+
+#pinterest-assistant-root * {
+  box-sizing: border-box;
+}
+
+.pa-card {
+  width: 350px;
+  max-height: 90vh;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.pa-header {
+  padding: 10px 14px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: move;
+  flex-shrink: 0;
+}
+
+.pa-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pa-logo-icon {
+  width: 24px;
+  height: 24px;
+  background: #e60023;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.pa-title {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: -0.2px;
+  color: var(--text);
+}
+
+.pa-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pa-icon-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+
+.pa-icon-btn:hover {
+  background: var(--bg-field);
+  color: var(--text);
+}
+
+.pa-queue-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: rgba(2, 132, 199, 0.12);
+  border-bottom: 1px solid rgba(2, 132, 199, 0.25);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.pa-queue-nav-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text);
+  font-weight: bold;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pa-queue-nav-btn:hover:not(:disabled) {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+}
+
+.pa-queue-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pa-queue-status {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pa-minimized-bubble {
+  background: #e60023;
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 30px;
+  box-shadow: 0 6px 20px rgba(230, 0, 35, 0.4);
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.pa-minimized-bubble:hover {
+  transform: scale(1.05);
+  background: #ad001a;
+}
+
+.pa-pin-info-bar {
+  padding: 8px 14px;
+  background: var(--bg-field);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.pa-pin-id-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.pa-pin-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: bold;
+  background: rgba(230, 0, 35, 0.15);
+  color: #ff4d6d;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(230, 0, 35, 0.3);
+}
+
+.pa-status-tag {
+  font-size: 10px;
+  color: var(--success);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.pa-body {
+  padding: 12px 14px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Image dock */
+.pa-image-dock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--bg-field);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.pa-thumb {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.pa-image-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.pa-btn-micro {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.pa-btn-micro:hover {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+}
+
+/* Copy Field Block */
+.pa-field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--bg-field);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 10px;
+  transition: border-color 0.15s;
+}
+
+.pa-field-block:focus-within {
+  border-color: var(--border-focus);
+}
+
+.pa-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pa-field-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.pa-field-count {
+  font-size: 9px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  color: var(--text-secondary);
+}
+
+.pa-field-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 11px;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+  user-select: text;
+  transition: border-color 0.15s;
+}
+
+.pa-field-input:focus {
+  border-color: #0284c7;
+}
+
+.pa-field-textarea {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 11px;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 48px;
+  user-select: text;
+  line-height: 1.35;
+  transition: border-color 0.15s;
+}
+
+.pa-field-textarea:focus {
+  border-color: #0284c7;
+}
+
+/* Copy Button per field */
+.pa-copy-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #334155;
+  border: none;
+  color: #f8fafc;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+#pinterest-assistant-root.theme-light .pa-copy-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.pa-copy-btn:hover {
+  background: #475569;
+}
+
+#pinterest-assistant-root.theme-light .pa-copy-btn:hover {
+  background: #cbd5e1;
+}
+
+.pa-copy-btn.copied {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  transform: scale(0.98);
+}
+
+/* Tags formatting */
+.pa-tags-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pa-tag-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+  max-height: 72px;
+  overflow-y: auto;
+}
+
+.pa-tag-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  user-select: text;
+  transition: all 0.15s;
+}
+
+.pa-tag-chip:hover {
+  border-color: var(--accent-secondary);
+}
+
+.pa-tag-chip.copied {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+}
+
+/* Prominent Copy All Button */
+.pa-btn-copy-all {
+  width: 100%;
+  background: #e60023;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(230, 0, 35, 0.3);
+  transition: all 0.15s ease-in-out;
+}
+
+.pa-btn-copy-all:hover {
+  background: #ad001a;
+  transform: translateY(-1px);
+}
+
+.pa-btn-copy-all.copied {
+  background: #10b981 !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Secondary Button */
+.pa-btn-secondary {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+
+.pa-btn-secondary:hover {
+  background: var(--bg-field);
+  border-color: #94a3b8;
+}
+
+.pa-footer {
+  padding: 8px 12px;
+  background: var(--header-bg);
+  border-top: 1px solid var(--border-color);
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.pa-toast {
+  position: absolute;
+  bottom: 40px;
+  left: 14px;
+  right: 14px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  display: none;
+  z-index: 100;
+  animation: pa-fade-in 0.15s ease-out;
+}
+
+@keyframes pa-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+`.trim();

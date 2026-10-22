@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "Pinterest Publishing Assistant",
+  "version": "1.0.0",
+  "description": "Companion browser extension for Pinterest Web App to prepare metadata, assist manual pin publishing, and transfer AI titles, descriptions, links, and boards without automating publish.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "host_permissions": [
+    "*://*.pinterest.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "http://127.0.0.1/*",
+      "https://*.run.app/*",
+      "https://*.googleusercontent.com/*",
+      "https://*.web.app/*",
+      "https://*.firebaseapp.com/*",
+      "https://*.google.com/*",
+      "https://ais-dev-lzzmijsyzdx4r5sno3lana-411996835156.europe-west2.run.app/*",
+      "https://ais-pre-lzzmijsyzdx4r5sno3lana-411996835156.europe-west2.run.app/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pinterest.com/*"
+      ],
+      "js": [
+        "messaging/protocol.js",
+        "pinterest/selectors.js",
+        "pinterest/detector.js",
+        "pinterest/filler.js",
+        "pinterestContent.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Pinterest Assistant",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}

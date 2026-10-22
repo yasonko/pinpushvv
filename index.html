@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pinpush v5.0.1D - Pinterest Mass Publishing & Bulk Scheduler</title>
+    <meta name="description" content="High-speed Pinterest publishing SaaS for mass image uploading, bulk watermark PNG studio, multi-page PDF uploading, bulk scheduling, board selection, CSV import/export, and queue management." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      // Guard against environments where window.fetch has only a getter
+      (function() {
+        try {
+          var origFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          var currentFetch = origFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(fn) {
+              currentFetch = typeof fn === 'function' ? fn : currentFetch;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          // If window cannot be redefined directly, try prototype
+          try {
+            if (window.Window && window.Window.prototype) {
+              var protoOrigFetch = window.Window.prototype.fetch;
+              var protoCurrentFetch = protoOrigFetch;
+              Object.defineProperty(window.Window.prototype, 'fetch', {
+                get: function() {
+                  return protoCurrentFetch;
+                },
+                set: function(fn) {
+                  protoCurrentFetch = typeof fn === 'function' ? fn : protoCurrentFetch;
+                },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } catch (err) {}
+        }
+      })();
+
+      // Gracefully ignore WebSocket connection errors from disabled HMR in iframe/preview
+      window.addEventListener('error', function(e) {
+        if (e && (
+          (typeof e.message === 'string' && (e.message.includes('WebSocket') || e.message.includes('ws://') || e.message.includes('wss://'))) ||
+          (e.target && (e.target instanceof WebSocket || e.target.constructor?.name === 'WebSocket'))
+        )) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          return true;
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(e) {
+        if (e && e.reason && (String(e.reason).includes('WebSocket') || String(e.reason?.message).includes('WebSocket'))) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+        }
+      }, true);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

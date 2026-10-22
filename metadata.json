@@ -1,0 +1,8 @@
+{
+  "name": "Remix pinpush v6.0.1D",
+  "description": "High-speed Pinterest publishing SaaS for mass image uploading, bulk scheduling, board selection, CSV import/export, and queue management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
